@@ -1,0 +1,25 @@
+name: pipeline - dev
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+jobs:
+  eslint-next-linter:
+    name: eslint-next-linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.13.2
+
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: installation
+        run: yarn install --inmutable
+
+      - name: next/linter
+        run: yarn lint
