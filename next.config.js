@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
+  images: {
+    domains: ["cdn.listen.moe"],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
