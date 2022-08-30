@@ -3,7 +3,6 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { Content } from "../src/Components/Content";
 import { Player } from "../src/Components/Player";
-import useListenmoeWS from "../src/hooks/useListenmoeWS";
 import { COVERS_BASE_URL } from "./constants";
 import { Main } from "./styles";
 import AudioComponent from "../src/Components/Player/Audio";
@@ -13,6 +12,7 @@ import { LISTEN_MOE_WEB_SOCKET_URLS } from "../src/hooks/constants";
 import { useDispatch } from "react-redux";
 import useWebSocket from "react-use-websocket";
 import { setWSData } from "../src/store/playerMoeSlice";
+import { setNotification } from "../src/store/notificationSlice";
 
 export const Home: NextPage = () => {
   const { musicType, data } = useSelector((state: RootState) => state.player);
@@ -43,11 +43,23 @@ export const Home: NextPage = () => {
         }
       }
     },
+
     onClose: () => {
       clearInterval(interval);
     },
+
+    onError: (event) => {
+      console.log(event);
+      dispatch(
+        setNotification({
+          text: "We have troubles connecting to Listen.moe streaming...",
+          duration: 0,
+          id: `${Date.now()}-Error-connecting-to-listen-moe-streaming`,
+          type: "danger",
+        })
+      );
+    },
   });
-  // const [data, loading] = useListenmoeWS(LISTEN_MOE_WEB_SOCKET_URLS[musicType]);
   console.log("DATA: ", data);
 
   const getAlbumsNames = React.useCallback(() => {
@@ -89,6 +101,7 @@ export const Home: NextPage = () => {
               artist={(!!data.song.artists.length && getArtistsNames()) || null}
               duration={data.song.duration}
               title={data.song.title}
+              startTime={data.startTime}
               isRadio
             />
           )}

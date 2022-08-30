@@ -20,6 +20,7 @@ interface PlayerProps {
   isRadio?: boolean;
   proggressHandable?: boolean;
   isLoading?: boolean;
+  startTime?: string;
 }
 
 const Player: React.FC<PlayerProps> = ({
@@ -31,6 +32,7 @@ const Player: React.FC<PlayerProps> = ({
   title,
   duration,
   isLoading,
+  startTime,
 }) => {
   const [progress, setProgress] = React.useState<number>();
   const shouldShowFullScreenPlayer = useSelector((state: RootState) => state.player.shouldShowFullScreenPlayer);
@@ -48,13 +50,14 @@ const Player: React.FC<PlayerProps> = ({
               title={title}
               duration={duration}
               coverURL={coverURL}
+              startTime={startTime}
             />
           ) : (
             <Container initial={{ y: "100%" }} animate={{ y: 0 }} $w="100%">
               <PlayerPanel artist={artist} album={album} title={title} coverURL={coverURL} />
               <Row w="100%">
                 <Controls isRadio />
-                <LivePanel duration={duration} />
+                <LivePanel duration={duration} startTime={startTime} />
               </Row>
               <UtilityPanel />
             </Container>

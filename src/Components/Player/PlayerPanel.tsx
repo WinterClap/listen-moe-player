@@ -59,9 +59,9 @@ export const PlayerPanel: React.FC<PlayerPanelProps> = ({ artist, album, coverUR
             <Title w={titleTextWrapperWidth} withAnimation>
               {title}
             </Title>
-            <Title w={titleTextWrapperWidth} withAnimation delay={12}>
+            {/* <Title w={titleTextWrapperWidth} withAnimation delay={(title.length * 20) / 45 + 5}>
               {title}
-            </Title>
+            </Title> */}
           </MediaInformationContainer>
         ) : (
           (title && (
@@ -92,7 +92,6 @@ export const PlayerPanel: React.FC<PlayerPanelProps> = ({ artist, album, coverUR
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         color={theme.light}
-        style={{ border: "1px solid black" }}
         size={24}
         m="0 10px"
         cursor="pointer"

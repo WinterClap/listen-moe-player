@@ -26,9 +26,18 @@ interface FullScreenPlayerProps {
   coverURL?: string | null;
   isRadio: boolean | undefined;
   duration: number | undefined;
+  startTime?: string;
 }
 
-export const FullScreenPlayer = ({ title, album, artist, coverURL, isRadio, duration }: FullScreenPlayerProps) => {
+export const FullScreenPlayer = ({
+  title,
+  album,
+  artist,
+  coverURL,
+  isRadio,
+  duration,
+  startTime,
+}: FullScreenPlayerProps) => {
   const theme = useTheme();
   const [shouldBeClickable] = useVolumeControl();
   const dispatch = useDispatch();
@@ -71,7 +80,7 @@ export const FullScreenPlayer = ({ title, album, artist, coverURL, isRadio, dura
         <Row m="10px 0px 0px 0px" $justifyContent="space-between">
           <Row>
             <Controls isRadio={isRadio} />
-            <LivePanel duration={duration} shouldPersist />
+            <LivePanel duration={duration} shouldPersist startTime={startTime} />
           </Row>
           <VolumeControl clickeable={shouldBeClickable} />
           <IconContainer

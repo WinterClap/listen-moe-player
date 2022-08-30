@@ -41,7 +41,7 @@ export const Section = () => {
     <SectionContainer>
       <button onClick={addNotification}>add Notification</button>
       <button onClick={addInfiniteNotification}>infinite notification</button>
-      <button onClick={shouffle}>Shouffle</button>
+      {/* <button onClick={shouffle}>Shouffle</button> */}
       <div>Section</div>
     </SectionContainer>
   );

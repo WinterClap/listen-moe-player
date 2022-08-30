@@ -23,7 +23,6 @@ export const Container = styled(motion.div)<{ $w?: string; h?: string }>`
 `;
 
 export const PlayerPanelContainer = styled.div`
-  border: 1px solid black;
   display: flex;
   align-items: center;
 `;
@@ -72,7 +71,6 @@ const animationCss = css`
 
 export const MediaInformationContainer = styled.div`
   cursor: pointer;
-  /* border: 1px solid white; */
   width: 100%;
   height: 20px;
   overflow: hidden;
@@ -81,11 +79,12 @@ export const MediaInformationContainer = styled.div`
 
 const marquee = keyframes`
  0% { transform: translateX(-100%); }
- 100% { transform: translateX(200%); };
+ 100% { transform: translateX(100%); };
 `;
 
 const marquee2 = keyframes`
- 100% { transform: translateX(150%); };
+ 0% { transform: translateX(-100%); }
+ 100% { transform: translateX(100%); };
 `;
 
 const marqueeAnimationCss = css`
@@ -120,7 +119,7 @@ export const Title = styled.h3<{ w?: number; delay?: number; withAnimation?: boo
   white-space: nowrap;
 
   transform: translateX(
-    ${(props) => (props.withAnimation ? (props.delay ? -props.w! * 2 + "px" : props.w + "px") : "none")}
+    ${(props) => (props.withAnimation ? (props.delay ? -props.w! + "px" : props.w + "px") : "none")}
   );
   ${(props) => (props.withAnimation ? (props.delay ? marqueeAnimationCss2 : marqueeAnimationCss) : "")};
   animation-delay: ${(props) => props.delay || 0}s;
@@ -158,7 +157,6 @@ export const ButtonContainer = styled(motion.span)<{ $main?: boolean }>`
 //  # LivePanel Components
 
 export const LivePanelContainer = styled.div`
-  border: 1px solid black;
   max-width: 300px;
   margin: 0 20px;
 
@@ -247,9 +245,7 @@ export const UtilityPanelContainer = styled.div`
 export const VolumeControlContainer = styled(motion.div)`
   display: flex;
   align-items: center;
-  border: 1px solid white;
   justify-content: flex-start;
-  border: 1px solid white;
   width: 24px;
   height: 24px;
   position: relative;
