@@ -18,7 +18,7 @@ export const Home: NextPage = () => {
   const { musicType, data } = useSelector((state: RootState) => state.player);
   const dispatch = useDispatch();
 
-  let interval: ReturnType<typeof setInterval>;
+  const interval = React.useRef<ReturnType<typeof setInterval> | null>(null);
 
   const { sendMessage, readyState } = useWebSocket(LISTEN_MOE_WEB_SOCKET_URLS[musicType], {
     onMessage: (event) => {
@@ -28,7 +28,7 @@ export const Home: NextPage = () => {
           case 0:
             console.log(response.d);
             sendMessage(JSON.stringify({ op: 9 }));
-            interval = setInterval(() => {
+            interval.current = setInterval(() => {
               console.log("hearbeat");
               sendMessage(JSON.stringify({ op: 9 }));
             }, response.d.heartbeat);
@@ -45,7 +45,7 @@ export const Home: NextPage = () => {
     },
 
     onClose: () => {
-      clearInterval(interval);
+      interval.current && clearInterval(interval.current);
     },
 
     onError: (event) => {
