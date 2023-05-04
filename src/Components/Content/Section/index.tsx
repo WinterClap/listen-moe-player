@@ -31,9 +31,13 @@ export const Section = () => {
 
   React.useEffect(() => {
     (async () => {
-      const response = await fetch("api/hello");
-      const data = await response.json();
-      console.log(data);
+      try {
+        const response = await fetch("/api/hello");
+        const data = await response.json();
+        console.log("api test: ", data); 
+      } catch (error) {
+        console.error("Error API: ", error)
+      }
     })();
   }, []);
 
